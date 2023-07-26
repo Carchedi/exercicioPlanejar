@@ -103,8 +103,13 @@
                     $total_noturno = diferenca_tempo($fim, $inicio);
                 }
             }else{
-                $total_diurno = diferenca_tempo("22:00", $inicio);
-                $total_noturno = diferenca_tempo($fim, "22:00");
+                if($periodo_inicio == 0){ 
+                    $total_diurno = diferenca_tempo("22:00", $inicio);
+                    $total_noturno = diferenca_tempo($fim, "22:00");
+                }else{                    
+                    $total_diurno = diferenca_tempo("05:00", $inicio);
+                    $total_noturno = diferenca_tempo($fim, "05:00");
+                }
             }
         }else{
             if( $periodo_inicio == $periodo_fim){
@@ -112,7 +117,9 @@
                     $total_diurno = adiciona_tempo(diferenca_tempo("22:00", $inicio),diferenca_tempo($fim,"05:00"));
                     $total_noturno = adiciona_tempo("00:00", "07:00");
                 }else{ 
-                    $total_noturno = adiciona_tempo(diferenca_tempo("24:00", $inicio),diferenca_tempo("00:00", $fim));
+                    $total_diurno = adiciona_tempo("00:00", "17:00");
+                    $total_noturno = adiciona_tempo(diferenca_tempo("24:00", $inicio),diferenca_tempo("22:00", $fim)); 
+                    $total_noturno = adiciona_tempo("00:00", "07:00");
                 }
             }else{
                 if($periodo_inicio == 0){
