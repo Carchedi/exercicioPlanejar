@@ -35,9 +35,10 @@
         if($minutos < 10 ){
             $minutos = "0".$minutos;
         }
-
         return $hora.":".$minutos;
     }
+
+
 
 
     $inicio = $_POST['inicial'];
