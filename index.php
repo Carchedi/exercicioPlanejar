@@ -38,6 +38,16 @@
         return $hora.":".$minutos;
     }
 
+    function get_periodo_horario($hora){ 
+        $hora = explode(':',$hora);
+        $hora = $hora[0];
+
+        if($hora >= 5 and $hora < 22 ){
+            return 0; // periodo diurno
+        }else{
+            return 1; // periodo noturno
+        }
+    }
 
 
 
@@ -48,7 +58,9 @@
         echo $inicio."\t".$fim;
         $tempo = tempo_trabalho($inicio, $fim);
         echo "<br><br>".$tempo;
-    }    
+        echo "<br><br><br>Inicio: ".get_periodo_horario($inicio);
+        echo "<br>Final: ".get_periodo_horario($fim);
+    }  
 ?>
 
 </html>
