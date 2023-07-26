@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Calculo Horas Trabalhadas PHP</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <h3>Cálculo Horas de Trabalho</h3>
-    <br>
-    <form action="index.php" method="post">
-        Hora inicial &nbsp;
-        <input type="time" name="inicial" min="00:00" max="23:59" required/>
-        <br>
-        Hora final &nbsp;
-        <input type="time" name="final" min="00:00" max="23:59" required/>
-        <br>
-        <input type="submit" value="Calcular"/>
-    </form>
+<body  style="background-color:LightGray;">
+    <div class="container">
+        <div class="row">
+            <p class="h4">Cálculo de Horas de Trabalho</p>  
+        </div>
+        <div class="row"> 
+            <form action="index.php" method="post" class="row" > 
+                <div class="col-auto">
+                    <label class="form-label" for="inicial">Hora inicial</label>
+                    <input id="inicial" type="time" name="inicial" min="00:00" max="23:59" required/>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label" for="final">Hora final</label>
+                    <input id="final" type="time" name="final" min="00:00" max="23:59" required/>
+                </div> 
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-sm">Calcular</button>
+                </div>
+            </form> 
+        </div> 
 </body>
 
 <?php
@@ -82,13 +93,14 @@
             $total[1] = $total[1] - 60;
         }
         return $total[0].":".$total[1];
-    }
+    } 
 
+	if (isset($_POST['inicial']) and isset($_POST['final'])){  
 
-    $inicio = $_POST['inicial'];
-    $fim = $_POST['final'];
+        
+        $inicio = $_POST['inicial'];
+        $fim = $_POST['final'];
 
-	if (isset($inicio) and isset($fim)){  
         $total_diurno = 0;
         $total_noturno = 0;
         
@@ -132,9 +144,20 @@
             }
         }
 
-        echo "<br>Inicio: ".$inicio."     final: ".$fim;
-        echo "<br><br> Resultado:<br>Total horas diurnas: ".formata_hora($total_diurno).
-             "<br>Total horas noturnas: ".formata_hora($total_noturno);    
+        echo " <div class='col-md-12'>
+                    <label class='form-label'>Início ".$inicio."</label> 
+                    <label class='form-label'>Final ".$fim."</label>
+               </div>";
+          
+        echo "<table>
+                <hr><p class='h6'>Resultado</p></hr>
+                <tr>
+                    <td>Total horas diurnas: </td><td>".formata_hora($total_diurno)."</td>
+                </tr>
+                <tr>
+                    <td>Total horas noturnas: </td><td>".formata_hora($total_noturno)."</td>
+                </tr>
+            </table>";
     }  
 ?>
 </html>
